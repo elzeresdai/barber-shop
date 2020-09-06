@@ -15,7 +15,15 @@ class CreateTimeTablesTable extends Migration
     {
         Schema::create('time_tables', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('barber_id');
+            $table->integer('day');
+            $table->integer('start_time');
+            $table->integer('end_time');
             $table->timestamps();
+
+            $table->foreign('barber_id')->references('id')->on('barbers')
+                ->onUpdate('CASCADE')->onDelete('CASCADE');
+
         });
     }
 

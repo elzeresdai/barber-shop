@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientsTable extends Migration
+class EventIndexes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('events', function (Blueprint $table) {
+            $table->index('barber_id');
+            $table->index('service_id');
+            $table->index('user_id');
+            $table->index('start_time');
         });
     }
 
@@ -26,6 +28,8 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::table('events', function (Blueprint $table) {
+            //
+        });
     }
 }
